@@ -41,8 +41,10 @@ app.add_middleware(
 )
 
 # ── Static files (local audio fallback) ───────────────────────────────────────
-os.makedirs("static/audio", exist_ok=True)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# In production (Vercel), the filesystem is read-only, so we don't create dirs.
+if not os.environ.get("VERCEL"):
+    os.makedirs("static/audio", exist_ok=True)
+    app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # ── Routers ───────────────────────────────────────────────────────────────────
 PREFIX = "/api/v1"

@@ -57,6 +57,19 @@ app.include_router(search.router,          prefix=f"{PREFIX}/search",          t
 app.include_router(recommendations.router, prefix=f"{PREFIX}/recommendations", tags=["Recommendations"])
 app.include_router(users.router,           prefix=f"{PREFIX}/users",           tags=["Users"])
 
+@app.post(f"{PREFIX}/seed", tags=["Admin"])
+def seed_db():
+    from seed import seed
+    try:
+        seed()
+        return {"msg": "Database seeded successfully"}
+    except Exception as e:
+        return {"error": str(e)}
+
+@app.get("/")
+def root():
+    return {"message": "Spotify Clone API is running. Go to /docs for Swagger."}
+
 
 @app.get("/api/v1/health", tags=["Health"])
 def health():

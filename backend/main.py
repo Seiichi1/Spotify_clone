@@ -57,7 +57,7 @@ app.include_router(search.router,          prefix=f"{PREFIX}/search",          t
 app.include_router(recommendations.router, prefix=f"{PREFIX}/recommendations", tags=["Recommendations"])
 app.include_router(users.router,           prefix=f"{PREFIX}/users",           tags=["Users"])
 
-@app.post(f"{PREFIX}/seed", tags=["Admin"])
+@app.get(f"{PREFIX}/seed", tags=["Admin"])
 def seed_db():
     from seed import seed
     try:

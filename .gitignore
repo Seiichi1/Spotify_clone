@@ -1,0 +1,8 @@
+backend/.venv/
+backend/__pycache__/
+backend/.env
+backend/spotify.db
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+.DS_Store
